@@ -333,6 +333,21 @@ class TestPost < Test::Unit::TestCase
 
           assert_equal "<<< <hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n\n<p>This <em>is</em> cool</p> >>>", post.output
         end
+
+        should "render date specified in front matter properly" do
+          post = setup_post("2010-01-09-date-override.textile")
+          do_render(post)
+
+          assert_equal "<p>Post with a front matter date</p>\n<p>10 Jan 2010</p>", post.output
+        end
+
+        should "render time specified in front matter properly" do
+          post = setup_post("2010-01-09-time-override.textile")
+          do_render(post)
+
+          assert_equal "<p>Post with a front matter time</p>\n<p>10 Jan 2010</p>", post.output
+        end
+
       end
     end
 
